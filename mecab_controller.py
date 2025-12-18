@@ -122,6 +122,16 @@ class MecabController:
             else:
                 buf.write(out.word)
         return buf.getvalue()
+    
+    def to_hiragana(self, expr: str) -> str:
+        """Converts the input expression to hiragana."""
+        buf = io.StringIO()
+        for out in self.translate(expr):
+            if out.katakana_reading:
+                buf.write(to_hiragana(out.katakana_reading))
+            else:
+                buf.write(to_hiragana(out.word))
+        return buf.getvalue()
 
 
 def main():
